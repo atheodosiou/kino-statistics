@@ -1,0 +1,14 @@
+.winning-numbers{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    // border: none !important;
+
+    .number{
+        // display:table-cell !important;
+        width: 5% !important;
+        text-align: center !important;
+        font-weight: bold;
+    }
+}

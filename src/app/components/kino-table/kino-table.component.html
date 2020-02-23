@@ -1,8 +1,8 @@
 <!-- <pre>
     {{kinoDraw|json}}
 </pre> -->
-<p-table [columns]="cols" [value]="kinoDraw" [lazy]="true" (onLazyLoad)="loadDrawsLazy($event)" [paginator]="true" 
-[rows]="rows" [totalRecords]="totalRecords">
+<p-table [columns]="cols" [value]="kinoDraw" [lazy]="true" (onLazyLoad)="loadDrawsLazy($event)" [paginator]="true"
+    [rows]="rows" [totalRecords]="totalRecords" [loading]="loading" [rowsPerPageOptions]="[5,10,15,20]" [showCurrentPageReport]="true">
     <ng-template pTemplate="colgroup" let-columns>
         <colgroup>
             <col *ngFor="let col of columns" [ngStyle]="col.style">
@@ -18,16 +18,22 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
             <ng-container *ngFor="let col of columns">
-                <td *ngIf="col.field==='last.drawId'">
+                <td *ngIf="col.field==='last.drawId'" [ngStyle]="col.style">
                     {{rowData.last.drawId}}
                 </td>
-                <td *ngIf="col.field==='last.drawTime'">
+                <td *ngIf="col.field==='last.drawTime'" [ngStyle]="col.style">
                     {{rowData.last.drawTime | toDate:'DD/MM/YYYY h:mm a'}}
                 </td>
                 <td *ngIf="col.field==='last.winningNumbers.list'">
-                    {{rowData.last.winningNumbers.list}}
+                    <!-- {{rowData.last.winningNumbers.list}} -->
+                    <div class="winning-numbers">
+                        <div *ngFor="let number of rowData.last.winningNumbers.list" class="number">
+                            {{number}}
+                        </div>
+                    </div>
                 </td>
-                <td *ngIf="col.field==='last.drawId.winningNumbers.bonus'">
+                <td *ngIf="col.field==='last.drawId.winningNumbers.bonus'"
+                    [ngStyle]="col.style">
                     {{rowData.last.winningNumbers.bonus}}
                 </td>
             </ng-container>

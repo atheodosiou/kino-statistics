@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { KinoService } from 'src/app/services/kino-service.service';
 import { KinoDraw } from 'src/app/models/draw.model';
 import { Col } from 'src/app/models/draw-col.interface';
@@ -10,38 +10,49 @@ import { HttpResponse } from '@angular/common/http';
   templateUrl: './kino-table.component.html',
   styleUrls: ['./kino-table.component.scss']
 })
-export class KinoTableComponent implements OnInit {
+export class KinoTableComponent implements OnInit, AfterViewInit {
 
-  constructor(private kinoService:KinoService) { }
+  constructor(private kinoService: KinoService) { }
 
-  @Input() rows:number=5;
-  totalRecords:number=0;
-  loading:boolean=false;
+  @Input() rows: number = 5;
+  totalRecords: number = 0;
+  loading: boolean = false;
 
-  kinoDraw:KinoDraw[];
-  cols:Col[]=[
-    {header:'Κλήρωση',field:'last.drawId',style:{width:'100px'}},
-    {header:'Ημερομηνία',field:'last.drawTime',style:{width:'170px'}},
-    {header:'Αριθμοί Κλήρωσης',field:'last.winningNumbers.list',style:{width:'calc(100% - 300px)',color:'yellow'}},
-    {header:'Bonus',field:'last.drawId.winningNumbers.bonus',style:{width:'100px'}},
+  kinoDraw: KinoDraw[];
+  cols: Col[] = [
+    { header: 'Κλήρωση', field: 'last.drawId', style: { width: '100px', "text-align": "center", "font-weight": "bold" } },
+    { header: 'Ημερομηνία', field: 'last.drawTime', style: { width: '170px', "text-align": "center", "font-weight": "bold" } },
+    { header: 'Αριθμοί Κλήρωσης', field: 'last.winningNumbers.list', style: { width: 'calc(100% - 370px)', color: 'yellow' } },
+    { header: 'Bonus', field: 'last.drawId.winningNumbers.bonus', style: { width: '100px', "text-align": "center", "font-weight": "bold" } },
   ];
 
   ngOnInit() {
-    
+    // this.loadDataLazy(this.rows,0);
+  }
+  ngAfterViewInit() {
+    this.loadDataLazy(this.rows, 0);
   }
 
-  loadDrawsLazy(event:LazyLoadEvent){
+  loadDrawsLazy(event: LazyLoadEvent) {
     console.log(event);
-    this.loading=true;
-    this.kinoService.getDraws({limit:event.rows,offset:event.first}).subscribe((res:HttpResponse<any>)=>{
-      // console.log(res.headers.keys())
-      this.kinoDraw=res.body as KinoDraw[];
+    this.loadDataLazy(event.rows, event.first);
+  }
+
+  private loadDataLazy(limit: number, offset: number) {
+    if (offset !== 0) {
+      this.loading = true;
+    }
+    this.kinoService.getDraws({ limit: limit, offset: offset }).subscribe((res: HttpResponse<any>) => {
+      this.kinoDraw = res.body as KinoDraw[];
       this.totalRecords = parseInt(res.headers.get('X-Total-Count'));
-      // console.log(res.body,res.headers);
-      // this.loading=false;
-    },error=>{
+      if (offset !== 0) {
+        this.loading = false;
+      }
+    }, error => {
       console.error(error);
-      this.loading=false;
+      if (offset !== 0) {
+        this.loading = false;
+      }
     });
   }
 }
