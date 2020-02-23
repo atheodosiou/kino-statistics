@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { KinoTableComponent } from './kino-table.component';
 import {FormsModule} from '@angular/forms';
 import {TableModule} from 'primeng/table';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    TableModule
+    TableModule,
+    PipesModule
   ],
   exports:[KinoTableComponent],
   declarations: [KinoTableComponent]

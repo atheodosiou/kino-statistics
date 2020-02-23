@@ -1,19 +1,36 @@
-<pre>
-  {{kinoDraw|json}}
-</pre>
-<!-- <p-table [value]="kinoDraws">
-  <ng-template pTemplate="header">
-      <tr>
-          <th *ngFor="let col of cols">
-              {{col.header}}
-          </th>
-      </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-car>
-      <tr>
-          <td *ngFor="let col of cols">
-                  {{car[col.field]}}
-          </td>
-      </tr>
-  </ng-template>
-</p-table> -->
+<!-- <pre>
+    {{kinoDraw|json}}
+</pre> -->
+<p-table [columns]="cols" [value]="kinoDraw" [lazy]="true" (onLazyLoad)="loadDrawsLazy($event)" [paginator]="true" 
+[rows]="rows" [totalRecords]="totalRecords">
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col *ngFor="let col of columns" [ngStyle]="col.style">
+        </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <ng-container *ngFor="let col of columns">
+                <td *ngIf="col.field==='last.drawId'">
+                    {{rowData.last.drawId}}
+                </td>
+                <td *ngIf="col.field==='last.drawTime'">
+                    {{rowData.last.drawTime | toDate:'DD/MM/YYYY h:mm a'}}
+                </td>
+                <td *ngIf="col.field==='last.winningNumbers.list'">
+                    {{rowData.last.winningNumbers.list}}
+                </td>
+                <td *ngIf="col.field==='last.drawId.winningNumbers.bonus'">
+                    {{rowData.last.winningNumbers.bonus}}
+                </td>
+            </ng-container>
+        </tr>
+    </ng-template>
+</p-table>

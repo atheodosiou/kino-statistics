@@ -12,7 +12,7 @@ export class KinoService {
 
   constructor(private http: HttpClient) { }
 
-  getDraws(body: DrawSearchBody): Observable<KinoDraw[]> {
-    return this.http.post<any[]>(KinoEndpoints.getEndpoint(KinoEndpointEnums.STATS), body);
+  getDraws(body: DrawSearchBody): Observable<any> {
+    return this.http.post(KinoEndpoints.getEndpoint(KinoEndpointEnums.STATS), body,{ observe: 'response' });
   }
 }

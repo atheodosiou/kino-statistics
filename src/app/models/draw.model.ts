@@ -4,7 +4,10 @@ export interface KinoDraw{
 }
 
 interface Last{
+    drawId:number;
+    drawTime:number;
     winningNumbers:WinningNumber[];
+
 }
 
 interface WinningNumber{
