@@ -5,6 +5,7 @@ import { DrawSearchBody } from '../models/draw-search-body.model';
 import { environment } from 'src/environments/environment';
 import { KinoEndpoints, KinoEndpointEnums } from '../models/endpoints';
 import { KinoDraw } from '../models/draw.model';
+import { NumberOccurrence } from '../models/occcurrences.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,5 +15,9 @@ export class KinoService {
 
   getDraws(body: DrawSearchBody): Observable<any> {
     return this.http.post(KinoEndpoints.getEndpoint(KinoEndpointEnums.STATS), body,{ observe: 'response' });
+  }
+
+  getNumberOccurrences():Observable<any>{
+    return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.OCCURRENCES),{observe:'response'});
   }
 }

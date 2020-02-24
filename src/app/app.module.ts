@@ -19,8 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
     ComponentsModule,
     HttpClientModule
   ],
-  providers: [
-    KinoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
