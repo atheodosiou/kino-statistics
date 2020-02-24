@@ -7,3 +7,15 @@
     [chartType]="barChartType">
   </canvas>
 </div>
+
+<div style="display: block" *ngIf="pieChartData">
+  <canvas baseChart
+    [datasets]="pieChartData"
+    [labels]="barChartLabels"
+    [options]="bonusChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="pieChartType"
+    [colors]="bonusChartColors"
+    >
+  </canvas>
+</div>
