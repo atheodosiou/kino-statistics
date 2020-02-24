@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { KinoService } from 'src/app/services/kino-service.service';
-import { NumberOccurrence } from 'src/app/models/occcurrences.interface';
+import { NumberOccurrence, KinobonusOccurrence } from 'src/app/models/occcurrences.interface';
 // import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 @Component({
   selector: 'bar-chart',
@@ -33,29 +33,38 @@ export class BarChartComponent implements OnInit {
   constructor(private kinoService:KinoService) { }
 
   ngOnInit() {
-    // Promise.all(
-    //   this.kinoService.getNumberOccurrences().toPromise()
-    // ).then((res)=>{}).catch(error=>{})
-    this.kinoService.getNumberOccurrences()
-    .subscribe(res=>{
-      // this.numberOccurrences = res.body as NumberOccurrence;
-      this.manipulateChartData(res.body as NumberOccurrence);
-    },error=>{
-      console.log(error);
-    });
+    Promise.all([
+      this.kinoService.getNumberOccurrences().toPromise(),
+      this.kinoService.getKinobonusOccurrences().toPromise()
+    ]).then((res)=>{
+      console.log((res[0].body as NumberOccurrence),(res[1].body as KinobonusOccurrence))
+      this.manipulateChartData(res[0].body as NumberOccurrence,res[1].body as KinobonusOccurrence);
+    }).catch(error=>{console.log(error)});
+    // this.kinoService.getNumberOccurrences()
+    // .subscribe(res=>{
+    //   this.manipulateChartData(res.body as NumberOccurrence);
+    // },error=>{
+    //   console.log(error);
+    // });
   }
 
-  private manipulateChartData(data:NumberOccurrence){
+  private manipulateChartData(numberData:NumberOccurrence,kinobonusData:KinobonusOccurrence){
     if(!this.barChartData) this.barChartData=[];
     // = [
     //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     // ]
 
-    let dataset:ChartDataSets={label:'Εμφανήσεις',data:[]};
-    data.occurences.forEach(oc=>{
-      dataset.data.push(oc.count);
+    let numbers:ChartDataSets={label:'Αριθμός',data:[]};
+    let kinobonus:ChartDataSets={label:'Kinobonus',data:[]};
+    
+    numberData.occurences.forEach(oc=>{
+      numbers.data.push(oc.count);
       this.barChartLabels.push(oc.number.toString());
     });
-    this.barChartData.push(dataset);
+    kinobonusData.occurences.forEach(oc=>{
+      kinobonus.data.push(oc.count);
+    });
+    this.barChartData.push(numbers);
+    this.barChartData.push(kinobonus);
   }
 }

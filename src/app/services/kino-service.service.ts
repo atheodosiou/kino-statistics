@@ -18,6 +18,10 @@ export class KinoService {
   }
 
   getNumberOccurrences():Observable<any>{
-    return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.OCCURRENCES),{observe:'response'});
+    return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.NUMBER_OCCURRENCES),{observe:'response'});
+  }
+
+  getKinobonusOccurrences():Observable<any>{
+    return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.KINOBONUS_OCCURRENCES),{observe:'response'});
   }
 }

@@ -2,7 +2,8 @@ import { environment } from 'src/environments/environment';
 
 export enum KinoEndpointEnums{
     STATS="api/kino/stats",
-    OCCURRENCES="api/kino/stats/number-occurrences"
+    NUMBER_OCCURRENCES="api/kino/stats/number-occurrences",
+    KINOBONUS_OCCURRENCES="api/kino/stats/kino-bonus-occurrences"
 }
 
 export class KinoEndpoints{
