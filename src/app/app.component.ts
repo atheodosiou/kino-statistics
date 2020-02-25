@@ -10,16 +10,16 @@ import { ChartTypeEnum } from './components/charts/chart-options';
 })
 export class AppComponent implements OnInit {
   title = 'kino-statistics';
-  rightActionLabel: string;
-  leftActionLabel: string = "Συχνότητα εμφάνησης αριθμών";
-
+  rightActionLabel: string='Συχνότητα εμφάνησης Kinobonus';
+  leftActionLabel: string='Συχνότητα εμφάνησης αριθμού'
+  centerActionLabel:string;
   private totalDraws: number;
 
   constructor(private kinoService: KinoService) { }
   ngOnInit() {
     this.kinoService.getTotalNumberOfDraws().subscribe(res => {
       this.totalDraws = res.totalDraws;
-      this.rightActionLabel = `Ανάλυση ${this.totalDraws} κληρώσεων`
+      this.centerActionLabel=`Ανάληση ${res.totalDraws} κληρώσεων`;
     }, error => {
       console.log(error);
     });

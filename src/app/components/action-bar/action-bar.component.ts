@@ -11,6 +11,7 @@ export class ActionBarComponent implements OnInit {
 
   @Input() rightActionLabel:string;
   @Input() leftActionLabel:string;
+  @Input() centerActionLabel:string;
   
   ngOnInit() {
   }

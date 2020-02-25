@@ -1,8 +1,6 @@
-<!-- <pre>
-    {{kinoDraw|json}}
-</pre> -->
 <p-table [columns]="cols" [value]="kinoDraw" [lazy]="true" (onLazyLoad)="loadDrawsLazy($event)" [paginator]="true"
-    [rows]="rows" [totalRecords]="totalRecords" [loading]="loading" [rowsPerPageOptions]="[5,10,15,20]" [showCurrentPageReport]="true">
+    [scrollable]="true" [style]="{width:'100%'}"[rows]="rows" [totalRecords]="totalRecords" [loading]="loading"
+    [rowsPerPageOptions]="[5,10,15,20]" [showCurrentPageReport]="true" selectionMode="single" [(selection)]="selectedDraw" dataKey="_id" >
     <ng-template pTemplate="colgroup" let-columns>
         <colgroup>
             <col *ngFor="let col of columns" [ngStyle]="col.style">
@@ -16,7 +14,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
+        <tr [pSelectableRow]="rowData">
             <ng-container *ngFor="let col of columns">
                 <td *ngIf="col.field==='last.drawId'" [ngStyle]="col.style">
                     {{rowData.last.drawId}}
@@ -32,8 +30,7 @@
                         </div>
                     </div>
                 </td>
-                <td *ngIf="col.field==='last.drawId.winningNumbers.bonus'"
-                    [ngStyle]="col.style">
+                <td *ngIf="col.field==='last.drawId.winningNumbers.bonus'" [ngStyle]="col.style">
                     {{rowData.last.winningNumbers.bonus}}
                 </td>
             </ng-container>

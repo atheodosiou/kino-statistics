@@ -1,14 +1,17 @@
-<div class="p-grid p-nogutter" style="height: 100vh;">
-    <div class="p-col-12 p-sm-12 p-md-12 p-lg-12 nav-bar" >
-        <div class="brand"><span style="font-weight: bold;">Kinograph</span> - Στατιστικά και Κληρώσεις KINO</div>
+<div class="p-grid" style="min-height: 100vh;margin: 0;">
+    <div class="p-col-12 p-sm-12 p-md-12 p-lg-12 nav-bar">
+        <div class="brand"><span class="logo">Kinograph</span> - Στατιστικά και Κληρώσεις KINO</div>
     </div>
-    <div class="p-col-12 p-sm-12 p-md-12 p-lg-12 body-container">
+    <div class="p-col-12 p-sm-12 p-md-12 p-lg-12 " style="margin-top: 3em;">
         <kino-table [rows]="10"></kino-table>
-        
-        <action-bar [rightActionLabel]="rightActionLabel" [leftActionLabel]="leftActionLabel"></action-bar>
+        <action-bar [rightActionLabel]="rightActionLabel" [centerActionLabel]="centerActionLabel" [leftActionLabel]="leftActionLabel"></action-bar>
+        <!-- <action-bar [rightActionLabel]="rightActionLabel" [leftActionLabel]="leftActionLabel"></action-bar>
+        <stacked-chart></stacked-chart> -->
+    </div>
+    <div class="p-col-6 p-sm-12 p-md-6 p-lg-6 ">
         <bar-chart [chart]="'NUMBERS'" [chartType]="'bar'"></bar-chart>
-
-        <action-bar [rightActionLabel]="rightActionLabel" [leftActionLabel]="leftActionLabel"></action-bar>
-        <bar-chart [chart]="'KINOBONUS'" [chartType]="'bar'"></bar-chart>
+    </div>
+    <div class="p-col-6 p-sm-12 p-md-6 p-lg-6 ">
+        <bar-chart [chart]="'KINOBONUS'" [chartType]="'horizontalBar'"></bar-chart>
     </div>
 </div>

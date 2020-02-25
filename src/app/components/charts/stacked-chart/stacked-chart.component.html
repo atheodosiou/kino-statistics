@@ -1,0 +1,5 @@
+<div *ngIf="_chartData && _chartLabels && _chartOptions && _chartType" style="display: block;">
+  <canvas style="height: 500px !important; width:100%;" baseChart [datasets]="_chartData" [labels]="_chartLabels" [options]="_chartOptions"
+    [legend]="_chartLegend" [chartType]="_chartType" [plugins]="_chartPlugins">
+  </canvas>
+</div>

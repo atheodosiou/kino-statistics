@@ -17,7 +17,8 @@ export class KinoTableComponent implements OnInit, AfterViewInit {
   @Input() rows: number = 5;
   totalRecords: number = 0;
   loading: boolean = false;
-
+  selectedDraw:KinoDraw;
+  
   kinoDraw: KinoDraw[];
   cols: Col[] = [
     { header: 'Κλήρωση', field: 'last.drawId', style: { width: '100px', "text-align": "center", "font-weight": "bold" } },
