@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ComponentsModule } from './components/components.module';
 import { KinoService } from './services/kino-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ActionBarModule } from './components/action-bar/action-bar.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    ActionBarModule
   ],
   bootstrap: [AppComponent]
 })

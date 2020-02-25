@@ -1,83 +1,93 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets, ChartColor } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { KinoService } from 'src/app/services/kino-service.service';
 import { NumberOccurrence, KinobonusOccurrence } from 'src/app/models/occcurrences.interface';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { numbersChartOptions, kinobonusChartOptions, ChartTypeEnum } from '../chart-options';
 
 @Component({
   selector: 'bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit {
-  // numberOccurrences:NumberOccurrence;
+export class BarChartComponent implements OnInit, AfterViewInit {
 
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
+  _chartOptions: ChartOptions;
+  _chartType: ChartType;
+  _chartLegend: boolean = true;
+  _chartLabels: Label[] = [];
+  _chartData: ChartDataSets[];
+  _chart: ChartTypeEnum;
+  _chartPlugins = [pluginDataLabels];
+  totalDraws: number;
 
-  public bonusChartOptions: ChartOptions = {
-    responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
+  constructor(private kinoService: KinoService) { }
 
-  public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'bar'
-  public pieChartType: ChartType = 'bar'
-  bonusChartColors:ChartColor='blue';
-  public barChartLegend = true;
-  public barChartPlugins = [pluginDataLabels];
+  @Input() set chart(type: ChartTypeEnum) {
+    this._chart = type;
+    if (type === ChartTypeEnum.NUMBERS) { this._chartOptions = numbersChartOptions; }
+    if (type === ChartTypeEnum.KINOBONUS) { this._chartOptions = kinobonusChartOptions; }
+  }
 
-  public barChartData: ChartDataSets[];
-  public pieChartData: ChartDataSets[];
+  @Input() set chartType(value: ChartType) {
+    this._chartType = value;
+  }
 
-  constructor(private kinoService:KinoService) { }
+
+
+  bonusChartColors: ChartColor = 'blue';
 
   ngOnInit() {
-    Promise.all([
-      this.kinoService.getNumberOccurrences().toPromise(),
-      this.kinoService.getKinobonusOccurrences().toPromise()
-    ]).then((res)=>{
-      console.log((res[0].body as NumberOccurrence),(res[1].body as KinobonusOccurrence))
-      this.manipulateChartData(res[0].body as NumberOccurrence,res[1].body as KinobonusOccurrence);
-    }).catch(error=>{console.log(error)});
+    if (this._chart) {
+      this._initChart();
+    }
   }
 
-  private manipulateChartData(numberData:NumberOccurrence,kinobonusData:KinobonusOccurrence){
-    if(!this.barChartData) this.barChartData=[];
-    if(!this.pieChartData) this.pieChartData=[];
-    // = [
-    //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    // ]
-
-    let numbers:ChartDataSets={label:'Αριθμός',data:[],backgroundColor:'#73C1FE',hoverBackgroundColor:'#20272A'};
-    let kinobonus:ChartDataSets={label:'Kinobonus',data:[],backgroundColor:'#EFB31D',hoverBackgroundColor:'#20272A'};
-    
-    let percentageSum=0;
-    numberData.occurences.forEach(oc=>{
-      numbers.data.push(oc.count);      
-      this.barChartLabels.push(oc.number.toString());
-    });
-    console.log(percentageSum)
-    kinobonusData.occurences.forEach(oc=>{
-      kinobonus.data.push(oc.count);
-    });
-    this.barChartData.push(numbers);
-    this.pieChartData.push(kinobonus);
+  ngAfterViewInit() {
+    // if (this._chart) {
+    //   this._initChart();
+    //   console.log(this._chart)
+    // }
   }
+
+  private _initChart() {
+   
+      if(this._chart === ChartTypeEnum.NUMBERS) {
+        this.kinoService.getNumberOccurrences().subscribe(res => {
+          this.totalDraws = parseInt(res.headers.get('X-Total-Count'))
+          this.manipulateChartData(res.body as NumberOccurrence, ChartTypeEnum.NUMBERS);
+        }, error => { console.log(error) });
+      }
+      if(this._chart === ChartTypeEnum.KINOBONUS) {
+        this.kinoService.getKinobonusOccurrences().subscribe(res => {
+          this.totalDraws = parseInt(res.headers.get('X-Total-Count'))
+          this.manipulateChartData(res.body as KinobonusOccurrence, ChartTypeEnum.KINOBONUS);
+        }, error => { console.log(error) });
+      }
+  }
+
+  private manipulateChartData(dataset: any, type: ChartTypeEnum) {
+    if (!this._chartData) this._chartData = [];
+
+    if (type === ChartTypeEnum.NUMBERS) {
+      if (this._chartLabels?.length > 0) this._chartLabels = [];
+      let numbers: ChartDataSets = { label: 'Αριθμός', data: [], backgroundColor: '#73C1FE', hoverBackgroundColor: '#20272A',fill:false };
+      (dataset as NumberOccurrence).occurences.forEach(oc => {
+        numbers.data.push(oc.count);
+        this._chartLabels.push(oc.number.toString());
+      });
+      this._chartData.push(numbers);
+    }
+    if (type === ChartTypeEnum.KINOBONUS) {
+      if (this._chartLabels?.length > 0) this._chartLabels = [];
+      let kinobonus: ChartDataSets = { label: 'Kinobonus', data: [], backgroundColor: '#EFB31D', hoverBackgroundColor: '#20272A' };
+      (dataset as KinobonusOccurrence).occurences.forEach(oc => {
+        kinobonus.data.push(oc.count);
+        this._chartLabels.push(oc.kinobonus.toString());
+      });     
+      this._chartData.push(kinobonus);
+    }
+  }
+
 }

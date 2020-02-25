@@ -34,7 +34,6 @@ export class KinoTableComponent implements OnInit, AfterViewInit {
   }
 
   loadDrawsLazy(event: LazyLoadEvent) {
-    console.log(event);
     this.loadDataLazy(event.rows, event.first);
   }
 

@@ -1,21 +1,5 @@
-<div style="display: block" *ngIf="barChartData">
-  <canvas baseChart
-    [datasets]="barChartData"
-    [labels]="barChartLabels"
-    [options]="barChartOptions"
-    [legend]="barChartLegend"
-    [chartType]="barChartType">
-  </canvas>
-</div>
-
-<div style="display: block" *ngIf="pieChartData">
-  <canvas baseChart
-    [datasets]="pieChartData"
-    [labels]="barChartLabels"
-    [options]="bonusChartOptions"
-    [legend]="barChartLegend"
-    [chartType]="pieChartType"
-    [colors]="bonusChartColors"
-    >
+<div *ngIf="_chartData && _chartLabels && _chartOptions && _chartType" style="display: block">
+  <canvas baseChart [datasets]="_chartData" [labels]="_chartLabels" [options]="_chartOptions"
+    [legend]="_chartLegend" [chartType]="_chartType" [plugins]="_chartPlugins">
   </canvas>
 </div>

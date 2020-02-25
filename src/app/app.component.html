@@ -4,7 +4,11 @@
     </div>
     <div class="p-col-12 p-sm-12 p-md-12 p-lg-12 body-container">
         <kino-table [rows]="10"></kino-table>
-        <bar-chart></bar-chart>
+        
+        <action-bar [rightActionLabel]="rightActionLabel" [leftActionLabel]="leftActionLabel"></action-bar>
+        <bar-chart [chart]="'NUMBERS'" [chartType]="'bar'"></bar-chart>
+
+        <action-bar [rightActionLabel]="rightActionLabel" [leftActionLabel]="leftActionLabel"></action-bar>
+        <bar-chart [chart]="'KINOBONUS'" [chartType]="'bar'"></bar-chart>
     </div>
 </div>
-<!--  -->

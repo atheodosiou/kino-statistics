@@ -24,4 +24,8 @@ export class KinoService {
   getKinobonusOccurrences():Observable<any>{
     return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.KINOBONUS_OCCURRENCES),{observe:'response'});
   }
+
+  getTotalNumberOfDraws():Observable<any>{
+    return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.TOTAL_DRAWS));
+  }
 }
