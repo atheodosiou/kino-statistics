@@ -30,10 +30,12 @@
                         </div>
                     </div>
                 </td>
-                <td *ngIf="col.field==='last.winningNumbers.bonus'" [ngStyle]="col.style">
-                    <div class="kinobonus">
-                        {{rowData.last.winningNumbers.bonus}}
-                    </div>
+                <td *ngIf="col.field==='last.winningNumbers.bonus'" [ngStyle]="col.style" >
+                    <div class="bonus">
+                        <div class="kinobonus">
+                            {{rowData.last.winningNumbers.bonus}}
+                        </div>
+                    </div>                    
                 </td>
                 <td *ngIf="col.field==='last.winningNumbers.sidebets.winningParity'" [ngStyle]="col.style">
                     {{rowData.last.winningNumbers.sidebets.winningParity | evenOddToString}}

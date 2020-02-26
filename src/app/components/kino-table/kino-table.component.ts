@@ -24,7 +24,7 @@ export class KinoTableComponent implements OnInit, AfterViewInit {
     { header: 'Κλήρωση', field: 'last.drawId', style: { width: '100px', "text-align": "center", "font-weight": "bold" } },
     { header: 'Ημερομηνία', field: 'last.drawTime', style: { width: '170px', "text-align": "center", "font-weight": "bold" } },
     { header: 'Αριθμοί Κλήρωσης', field: 'last.winningNumbers.list', style: { width: 'calc(100% - 370px)', color: 'yellow' } },
-    { header: 'Bonus', field: 'last.winningNumbers.bonus', style: { width: '80px', "text-align": "center", "font-weight": "bold",display:"flex","align-items":"center","justify-content":"center" } },
+    { header: 'Bonus', field: 'last.winningNumbers.bonus', style: { width: '80px', "text-align": "center", "font-weight": "bold"} },
     { header: 'Μ/Ζ', field: 'last.winningNumbers.sidebets.winningParity', style: { width: '80px', "text-align": "center", "font-weight": "bold" } },
     { header: 'Στήλη', field: 'last.winningNumbers.sidebets.winningColumn', style: { width: '80px', "text-align": "center", "font-weight": "bold" } },
   ];

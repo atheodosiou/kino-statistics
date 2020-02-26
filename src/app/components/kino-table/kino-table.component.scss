@@ -26,11 +26,21 @@
     }
 }
 
-.kinobonus{
-    background-color: $blue;
-    border-radius: 11px;
-    padding-top: 1px;
-    width: 22px;
-    height: 22px;
-    color: white;
+.bonus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto 0px !important;
+    // width: 100% !important;
+    // background-color: red !important;
+    
+
+    .kinobonus{
+        background-color: $blue;
+        border-radius: 11px;
+        padding-top: 1px;
+        width: 22px;
+        height: 22px;
+        color: white;
+    }
 }
