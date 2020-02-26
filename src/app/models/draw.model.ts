@@ -13,4 +13,10 @@ interface Last{
 interface WinningNumber{
     list:number[];
     bonus:number[]
+    sidebets:Sidebets;
+}
+
+interface Sidebets{
+    winningColumn:number;
+    winningParity:string;
 }

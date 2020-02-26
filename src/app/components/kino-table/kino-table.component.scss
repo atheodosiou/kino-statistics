@@ -1,3 +1,5 @@
+@import '../../shared/styles/variables';
+
 .winning-numbers{
     display: flex !important;
     flex-direction: row !important;
@@ -10,5 +12,25 @@
         width: 5% !important;
         text-align: center !important;
         font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+       .ball{
+        background-color: $yellow;
+        border-radius: 11px;
+        padding-top: 1px;
+        width: 22px;
+        height: 22px;
+       }
     }
+}
+
+.kinobonus{
+    background-color: $blue;
+    border-radius: 11px;
+    padding-top: 1px;
+    width: 22px;
+    height: 22px;
+    color: white;
 }

@@ -26,12 +26,20 @@
                     <!-- {{rowData.last.winningNumbers.list}} -->
                     <div class="winning-numbers">
                         <div *ngFor="let number of rowData.last.winningNumbers.list" class="number">
-                            {{number}}
+                            <div class="ball">{{number}}</div>
                         </div>
                     </div>
                 </td>
-                <td *ngIf="col.field==='last.drawId.winningNumbers.bonus'" [ngStyle]="col.style">
-                    {{rowData.last.winningNumbers.bonus}}
+                <td *ngIf="col.field==='last.winningNumbers.bonus'" [ngStyle]="col.style">
+                    <div class="kinobonus">
+                        {{rowData.last.winningNumbers.bonus}}
+                    </div>
+                </td>
+                <td *ngIf="col.field==='last.winningNumbers.sidebets.winningParity'" [ngStyle]="col.style">
+                    {{rowData.last.winningNumbers.sidebets.winningParity | evenOddToString}}
+                </td>
+                <td *ngIf="col.field==='last.winningNumbers.sidebets.winningColumn'" [ngStyle]="col.style">
+                    {{rowData.last.winningNumbers.sidebets.winningColumn}}
                 </td>
             </ng-container>
         </tr>

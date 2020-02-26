@@ -1,12 +1,15 @@
 import { NgModule } from "@angular/core";
 import { ToDatePipe } from './date.pipe';
+import { EvenOddPipe } from './evenOdd.pipe';
 
 @NgModule({
    declarations: [
-      ToDatePipe
+      ToDatePipe,
+      EvenOddPipe
    ],
    exports: [
-      ToDatePipe
+      ToDatePipe,
+      EvenOddPipe
    ]
 })
 export class PipesModule{}
