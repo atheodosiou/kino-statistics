@@ -72,7 +72,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
     if (type === ChartTypeEnum.NUMBERS) {
       if (this._chartLabels?.length > 0) this._chartLabels = [];
-      let numbers: ChartDataSets = { label: 'Αριθμός', data: [], backgroundColor: '#20272A', hoverBackgroundColor: '#EFB31D'};
+      let numbers: ChartDataSets = { label: 'Αριθμός', data: [], backgroundColor: '#378AE2', hoverBackgroundColor: '#EFB31D'};
       (dataset as NumberOccurrence).occurences.forEach(oc => {
         numbers.data.push(oc.count);
         this._chartLabels.push(oc.number.toString());

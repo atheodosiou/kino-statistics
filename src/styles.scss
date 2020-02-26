@@ -24,9 +24,14 @@ html,body{
 }
 
 .ui-table .ui-table-tbody > tr.ui-state-highlight{
-    background-color: $yellow !important;
+    background-color: $blue!important;
+    border: none !important;
+
+    &:focus{
+        border: none !important;
+    }
 }
 
 .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
-    background-color: $yellow !important;
+    background-color: $blue !important;
 }
