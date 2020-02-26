@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   rightActionLabel: string='Συχνότητα εμφάνησης Kinobonus';
   leftActionLabel: string='Συχνότητα εμφάνησης αριθμού'
   centerActionLabel:string;
+  loading:boolean=true;
   private totalDraws: number;
 
   constructor(private kinoService: KinoService) { }
@@ -20,6 +21,9 @@ export class AppComponent implements OnInit {
     this.kinoService.getTotalNumberOfDraws().subscribe(res => {
       this.totalDraws = res.totalDraws;
       this.centerActionLabel=`Ανάληση ${res.totalDraws} κληρώσεων`;
+      setTimeout(() => {
+        this.loading=false;
+      }, 1000);
     }, error => {
       console.log(error);
     });

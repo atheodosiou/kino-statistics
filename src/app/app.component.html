@@ -1,4 +1,7 @@
-<div class="p-grid" style="min-height: 100vh;margin: 0;">
+<div *ngIf="loading" class="loading-wrapper">
+    <loader title="Loading. Please wait..."></loader>
+</div>
+<div *ngIf="!loading" class="p-grid" style="min-height: 100vh;margin: 0;">
     <div class="p-col-12 p-sm-12 p-md-12 p-lg-12 nav-bar">
         <div class="brand"><span class="logo">Kinograph</span> - Στατιστικά και Κληρώσεις KINO</div>
     </div>

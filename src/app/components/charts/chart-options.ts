@@ -1,4 +1,4 @@
-import { ChartOptions, ChartType, ChartDataSets, ChartColor } from 'chart.js';
+import { ChartOptions} from 'chart.js';
 
 export enum ChartTypeEnum{
     NUMBERS='NUMBERS',
