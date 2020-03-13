@@ -1,0 +1,24 @@
+<p-panel header="Δημιουργήστε το επόμενο κερδοφόρο σας δελτίο!" [style]="{'margin-bottom':'20px'}">
+  <div class="p-grid p-align-center vertical-container">
+    <div class="p-col-3 p-sm-12 p-md-6 p-lg-3">
+      <div class="box">
+        <p-dropdown [options]="generationTypes" [(ngModel)]="generationType" optionLabel="label" [style]="{width:'100%'}"></p-dropdown>
+      </div>
+    </div>
+    <div class="p-col-3 p-sm-12 p-md-6 p-lg-3">
+      <div class="box">
+        <input type="number" pInputText placeholder="Σύνολο αριθμών" min="1" max="2" style="width: 100%;">
+      </div>
+    </div>
+    <div class="p-col-3 p-sm-6 p-md-6 p-lg-3">
+      <div class="box">
+        <p-checkbox binary="true" label="KINOBONUS" [(ngModel)]="kionbonus"></p-checkbox>
+      </div>
+    </div>
+    <div class="p-col-3 p-sm-6 p-md-6 p-lg-3">
+      <div class="box">
+        <button pButton type="button" label="Δημιουργία Δελτίου" style="width: 100%;"></button>
+      </div>
+    </div>
+  </div>
+</p-panel>

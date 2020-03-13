@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   leftActionLabel: string='Συχνότητα εμφάνησης αριθμού'
   centerActionLabel:string;
   loading:boolean=true;
+  generatorLabel:string='Δημιουργία δελτίου'
   private totalDraws: number;
 
   constructor(private kinoService: KinoService) { }
