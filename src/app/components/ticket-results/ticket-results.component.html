@@ -1,0 +1,11 @@
+<p-panel
+  header="Δελτίο"
+  [style]="{ 'margin-bottom': '20px' }"
+>
+<div class="wrapper">
+  <div class="results">
+    <div class="item" *ngFor="let item of data?.value">{{item.number}}</div>
+  <div *ngIf="data?.kinobonus?.number" class="item kinobonus" >{{data?.kinobonus?.number}}</div>
+  </div>
+</div>
+</p-panel>

@@ -21,9 +21,9 @@
         <action-bar [centerActionLabel]="generatorLabel"></action-bar>
     </div>
     <div class="p-col-6 p-sm-12 p-md-6 p-lg-6">
-        <ticket-generator [numberOccurences]="numbers" [kinobonusOccurences]="kinobonus" (onGenerate)="onGenerate($event)"></ticket-generator>
+        <ticket-generator [numberOccurences]="numbers" [kinobonusOccurences]="kinobonus" (onGenerate)="ticket=$event"></ticket-generator>
     </div>
     <div class="p-col-6 p-sm-12 p-md-6 p-lg-6">
-        Ticket Results
+        <ticket-results *ngIf="ticket" [ticket]="ticket"></ticket-results>
     </div>
 </div>

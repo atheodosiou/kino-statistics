@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   numbers:NumberOccurrence;
   kinobonus:KinobonusOccurrence;
-
+  ticket:Ticket;
   private totalDraws: number;
 
   constructor(private kinoService: KinoService) { }
@@ -33,9 +33,5 @@ export class AppComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
-
-  onGenerate(ticket:Ticket){
-    console.log(ticket);
   }
 }
