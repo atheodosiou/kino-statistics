@@ -7,6 +7,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ButtonModule} from 'primeng/button';
+import {SpinnerModule} from 'primeng/spinner';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +16,8 @@ import {ButtonModule} from 'primeng/button';
     PanelModule,
     InputTextModule,
     CheckboxModule,
-    ButtonModule
+    ButtonModule,
+    SpinnerModule
   ],
   exports:[KinoTicketGeneratorComponent],
   declarations: [KinoTicketGeneratorComponent]

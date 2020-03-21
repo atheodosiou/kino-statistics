@@ -16,15 +16,8 @@
     </div>
     <div class="p-col-3 p-sm-12 p-md-6 p-lg-3">
       <div class="box">
-        <input
-          type="number"
-          pInputText
-          [(ngModel)]="totalNumbers"
-          placeholder="Σύνολο αριθμών"
-          min="1"
-          max="2"
-          style="width: 100%;"
-        />
+        <p-spinner  [(ngModel)]="totalNumbers" style="width: 100%;"
+        placeholder="Σύνολο αριθμών" [min]="1" [max]="12" [disabled]="!generationType"></p-spinner>
       </div>
     </div>
     <div class="p-col-3 p-sm-6 p-md-6 p-lg-3">
@@ -33,6 +26,7 @@
           binary="true"
           label="KINOBONUS"
           [(ngModel)]="kionbonus"
+          [disabled]="!totalNumbers"
         ></p-checkbox>
       </div>
     </div>

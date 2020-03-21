@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KinoService } from './services/kino-service.service';
 import { NumberOccurrence, KinobonusOccurrence } from './models/occcurrences.interface';
 import { ChartTypeEnum } from './components/charts/chart-options';
+import { Ticket } from './components/kino-ticket-generator/kino-ticket-generator.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 
   numbers:NumberOccurrence;
   kinobonus:KinobonusOccurrence;
-  
+
   private totalDraws: number;
 
   constructor(private kinoService: KinoService) { }
@@ -32,5 +33,9 @@ export class AppComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  onGenerate(ticket:Ticket){
+    console.log(ticket);
   }
 }
