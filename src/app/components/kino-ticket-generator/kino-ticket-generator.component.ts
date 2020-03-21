@@ -15,6 +15,7 @@ export enum GenerationType {
 export interface Ticket {
   value: NumberOcc[];
   kinobonus?: NumberOcc;
+  description?: string;
 }
 
 @Component({
@@ -27,8 +28,8 @@ export class KinoTicketGeneratorComponent implements OnInit {
 
   generationTypes: SelectItem[] = [
     { label: "Τυχαία επιλογή", value: GenerationType.RANDOM },
-    { label: "Συχνότερα", value: GenerationType.MOST_FREQUENT },
-    { label: "Λογότερο Συχνά", value: GenerationType.LESS_FREQUENT }
+    { label: "Συχνά εμφανιζόμενα", value: GenerationType.MOST_FREQUENT },
+    { label: "Σπάνια εμφανιζόμενα", value: GenerationType.LESS_FREQUENT }
   ];
   generationType: SelectItem;
   kionbonus: boolean = true;
@@ -95,7 +96,7 @@ export class KinoTicketGeneratorComponent implements OnInit {
 
   getTicket(order?: "ASC" | "DESC"): Ticket {
     const ticket: Ticket = { value: [] };
-    if(order){
+    if (order) {
       const occurences = this.sortOccurences(
         this._numberOccurences,
         order
@@ -103,14 +104,44 @@ export class KinoTicketGeneratorComponent implements OnInit {
       for (let i = 0; i < this.totalNumbers; i++) {
         ticket.value.push(occurences[i]);
       }
-    }else{
+    } else {
       for (let i = 0; i < this.totalNumbers; i++) {
-        ticket.value.push(this._numberOccurences[Math.floor(Math.random()*this._numberOccurences.length)]);
+        ticket.value.push(
+          this._numberOccurences[
+            Math.floor(Math.random() * this._numberOccurences.length)
+          ]
+        );
       }
     }
     if (this.kionbonus) {
-      ticket.kinobonus=ticket.value[Math.floor(Math.random()*ticket.value.length)]
+      ticket.kinobonus =
+        ticket.value[Math.floor(Math.random() * ticket.value.length)];
     }
+    ticket.description=this.getDescription();
     return ticket;
+  }
+
+  private getDescription(): string {
+    let description: string = "";
+    let type: string = "";
+    switch (this.generationType.value) {
+      case GenerationType.RANDOM: {
+        type = "τυχαία";
+        break;
+      }
+      case GenerationType.MOST_FREQUENT: {
+        type = "συχνά εμφανιζόμενα";
+        break;
+      }
+      case GenerationType.LESS_FREQUENT: {
+        type = "σπάνια εμφανιζόμενα";
+        break;
+      }
+    }
+    description = `Δελτίο: ${this.totalNumbers} ${type} νούμερα`;
+    if (this.kionbonus) {
+      description += " με KINOBONUS";
+    }
+    return description;
   }
 }

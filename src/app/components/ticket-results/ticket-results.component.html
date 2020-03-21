@@ -1,11 +1,17 @@
 <p-panel
-  header="Δελτίο"
+  [header]="data?.description || 'Δελτίο'"
   [style]="{ 'margin-bottom': '20px' }"
 >
 <div class="wrapper">
   <div class="results">
-    <div class="item" *ngFor="let item of data?.value">{{item.number}}</div>
-  <div *ngIf="data?.kinobonus?.number" class="item kinobonus" >{{data?.kinobonus?.number}}</div>
+    <div class="item" *ngFor="let item of data?.value" 
+    pTooltip="Εμφανήσεις: {{ item?.count}}" 
+    tooltipPosition="top">
+    {{item.number}}
+  </div>
+  <div *ngIf="data?.kinobonus?.number" class="item kinobonus"
+  pTooltip="Εμφανήσεις: {{data?.kinobonus?.count}}" 
+  tooltipPosition="top">{{data?.kinobonus?.number}}</div>
   </div>
 </div>
 </p-panel>
