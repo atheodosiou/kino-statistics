@@ -13,8 +13,8 @@ export enum GenerationType {
   RANDOM = "RANDOM"
 }
 export interface Ticket {
-  numbers: number[];
-  kinobonus?: number;
+  value: NumberOcc[];
+  kinobonus?: NumberOcc;
 }
 
 @Component({
@@ -55,7 +55,7 @@ export class KinoTicketGeneratorComponent implements OnInit {
   generate() {
     switch (this.generationType.value) {
       case GenerationType.RANDOM: {
-        this.onGenerate.emit(this.getRandomTicket());
+        this.onGenerate.emit(this.getTicket());
         break;
       }
       case GenerationType.MOST_FREQUENT: {
@@ -93,37 +93,23 @@ export class KinoTicketGeneratorComponent implements OnInit {
     return Math.floor(Math.random() * (80 - 1) + 1);
   }
 
-  private getRandomTicket(): Ticket {
-    const ticket: Ticket = { numbers: [] };
-    for (let i = 0; i < this.totalNumbers; i++) {
-      ticket.numbers.push(this.getRandomInt());
-    }
-    if (this.kionbonus) {
-      ticket.kinobonus=ticket.numbers[Math.floor(Math.random()*(ticket.numbers.length - 1)+1)];
-    }
-    return ticket;
-  }
-
-  getTicket(order: "ASC" | "DESC"): Ticket {
-    const ticket: Ticket = { numbers: [] };
-    const occurences = this.sortOccurences(
-      this._numberOccurences,
-      order
-    ) as NumberOcc[];
-    for (let i = 0; i < this.totalNumbers; i++) {
-      ticket.numbers.push(occurences[i].number);
-    }
-    if (this.kionbonus) {
-      switch (order) {
-        case "ASC": {
-          ticket.kinobonus = Math.min(...ticket.numbers);
-          break;
-        }
-        case "DESC": {
-          ticket.kinobonus = Math.max(...ticket.numbers);
-          break;
-        }
+  getTicket(order?: "ASC" | "DESC"): Ticket {
+    const ticket: Ticket = { value: [] };
+    if(order){
+      const occurences = this.sortOccurences(
+        this._numberOccurences,
+        order
+      ) as NumberOcc[];
+      for (let i = 0; i < this.totalNumbers; i++) {
+        ticket.value.push(occurences[i]);
       }
+    }else{
+      for (let i = 0; i < this.totalNumbers; i++) {
+        ticket.value.push(this._numberOccurences[Math.floor(Math.random()*this._numberOccurences.length)]);
+      }
+    }
+    if (this.kionbonus) {
+      ticket.kinobonus=ticket.value[Math.floor(Math.random()*ticket.value.length)]
     }
     return ticket;
   }
