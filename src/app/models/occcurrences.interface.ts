@@ -1,19 +1,19 @@
 export interface NumberOccurrence{
     drawCount:number;
-    occurences:NumberOccurence[];
+    occurences:NumberOcc[];
 }
 export interface KinobonusOccurrence{
     drawCount:number;
-    occurences:KinobonusOccurence[];
+    occurences:KinobonusOcc[];
 }
 
-interface NumberOccurence{    
+export interface NumberOcc{    
     number:number;
     count:number;
     percentage:number;
 }
 
-interface KinobonusOccurence{    
+export interface KinobonusOcc{    
     kinobonus:number;
     count:number;
     percentage:number;

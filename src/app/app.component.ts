@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KinoService } from './services/kino-service.service';
-import { NumberOccurrence } from './models/occcurrences.interface';
+import { NumberOccurrence, KinobonusOccurrence } from './models/occcurrences.interface';
 import { ChartTypeEnum } from './components/charts/chart-options';
 
 @Component({
@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   centerActionLabel:string;
   loading:boolean=true;
   generatorLabel:string='Δημιουργία δελτίου'
+
+  numbers:NumberOccurrence;
+  kinobonus:KinobonusOccurrence;
+  
   private totalDraws: number;
 
   constructor(private kinoService: KinoService) { }

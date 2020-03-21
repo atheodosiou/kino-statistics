@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets, ChartColor } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { KinoService } from 'src/app/services/kino-service.service';
@@ -11,7 +11,7 @@ import { numbersChartOptions, kinobonusChartOptions, ChartTypeEnum } from '../ch
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit, AfterViewInit {
+export class BarChartComponent implements OnInit {
 
   _chartOptions: ChartOptions;
   _chartType: ChartType;
@@ -23,6 +23,9 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   totalDraws: number;
 
   constructor(private kinoService: KinoService) { }
+  
+  @Output() onNumbersLoad:EventEmitter<NumberOccurrence>=new EventEmitter<NumberOccurrence>();
+  @Output() onKinobonusLoad:EventEmitter<KinobonusOccurrence>=new EventEmitter<KinobonusOccurrence>();
 
   @Input() set chart(type: ChartTypeEnum) {
     this._chart = type;
@@ -44,24 +47,20 @@ export class BarChartComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    // if (this._chart) {
-    //   this._initChart();
-    //   console.log(this._chart)
-    // }
-  }
-
   private _initChart() {
    
       if(this._chart === ChartTypeEnum.NUMBERS) {
         this.kinoService.getNumberOccurrences().subscribe(res => {
           this.totalDraws = parseInt(res.headers.get('X-Total-Count'))
+          this.onNumbersLoad.emit(res.body as NumberOccurrence);
           this.manipulateChartData(res.body as NumberOccurrence, ChartTypeEnum.NUMBERS);
+
         }, error => { console.log(error) });
       }
       if(this._chart === ChartTypeEnum.KINOBONUS) {
         this.kinoService.getKinobonusOccurrences().subscribe(res => {
           this.totalDraws = parseInt(res.headers.get('X-Total-Count'))
+          this.onKinobonusLoad.emit(res.body as KinobonusOccurrence);
           this.manipulateChartData(res.body as KinobonusOccurrence, ChartTypeEnum.KINOBONUS);
         }, error => { console.log(error) });
       }

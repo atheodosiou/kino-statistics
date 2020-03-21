@@ -12,16 +12,16 @@
         <stacked-chart></stacked-chart> -->
     </div>
     <div class="p-col-6 p-sm-12 p-md-6 p-lg-6 ">
-        <bar-chart [chart]="'NUMBERS'" [chartType]="'bar'"></bar-chart>
+        <bar-chart [chart]="'NUMBERS'" [chartType]="'bar'" (onNumbersLoad)="numbers=$event;"></bar-chart>
     </div>
     <div class="p-col-6 p-sm-12 p-md-6 p-lg-6 ">
-        <bar-chart [chart]="'KINOBONUS'" [chartType]="'bar'"></bar-chart>
+        <bar-chart [chart]="'KINOBONUS'" [chartType]="'bar'" (onKinobonusLoad)="kinobonus=$event;"></bar-chart>
     </div>
     <div class="p-col-12 p-sm-12 p-md-12 p-lg-12">
         <action-bar [centerActionLabel]="generatorLabel"></action-bar>
     </div>
     <div class="p-col-6 p-sm-12 p-md-6 p-lg-6">
-        <ticket-generator></ticket-generator>
+        <ticket-generator [numberOccurences]="numbers" [kinobonusOccurences]="kinobonus"></ticket-generator>
     </div>
     <div class="p-col-6 p-sm-12 p-md-6 p-lg-6">
         Ticket Results
