@@ -4,7 +4,7 @@
 import 'zone.js/dist/zone-error';
 export const environment = {
   production: false,
-  server_url:'http://194.32.78.79:4242'
+  server_url:'http://api.kinograph.anastasios.theodosiou.me'
 };
 
 /*

@@ -14,18 +14,22 @@ export class KinoService {
   constructor(private http: HttpClient) { }
 
   getDraws(body: DrawSearchBody): Observable<any> {
+    console.log(KinoEndpoints.getEndpoint(KinoEndpointEnums.STATS));
     return this.http.post(KinoEndpoints.getEndpoint(KinoEndpointEnums.STATS), body,{ observe: 'response' });
   }
 
   getNumberOccurrences():Observable<any>{
+    console.log(KinoEndpoints.getEndpoint(KinoEndpointEnums.NUMBER_OCCURRENCES))
     return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.NUMBER_OCCURRENCES),{observe:'response'});
   }
 
   getKinobonusOccurrences():Observable<any>{
+    console.log(KinoEndpoints.getEndpoint(KinoEndpointEnums.KINOBONUS_OCCURRENCES))
     return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.KINOBONUS_OCCURRENCES),{observe:'response'});
   }
 
   getTotalNumberOfDraws():Observable<any>{
+    console.log(KinoEndpoints.getEndpoint(KinoEndpointEnums.TOTAL_DRAWS))
     return this.http.get(KinoEndpoints.getEndpoint(KinoEndpointEnums.TOTAL_DRAWS));
   }
 }
